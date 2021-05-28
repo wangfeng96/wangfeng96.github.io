@@ -5,4 +5,35 @@
 <body>
   Body
   </body>
+ 
+ 
+ <script type="text/javascript">
+  window.onload = function () {
+    // 从文本中读取内容到界面
+    function doAjaxCall(the_request) {
+      var request = null;
+      if (window.XMLHttpRequest) {
+        request = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      if (request) {
+        request.open("POST", the_request, true);
+        request.onreadystatechange = function () {
+          if (request.readyState === 4) {
+            if (request.status == 200 || request.status == 0) {
+              document.getElementById("vv").innerHTML = request.responseText;
+            }
+          }
+        }
+        request.send(null);
+      } else {
+        alert("error");
+      }
+    }
+
+    doAjaxCall('1.json');
+  };
+
+</script>
 </html>
